@@ -25,10 +25,10 @@ conda create -n street-gaussian python=3.8
 conda activate street-gaussian
 
 # Install torch (corresponding to your CUDA version)
-pip install torch==1.13.1+cu116 torchvision==0.14.1+cu116 torchaudio==0.13.1 --extra-index-url https://download.pytorch.org/whl/cu116
+conda install pytorch==1.13.1 torchvision==0.14.1 torchaudio==0.13.1 pytorch-cuda=11.7 -c pytorch -c nvidia
 
 # Install requirements
-pip install -r requirments.txt
+pip install -r requirements.txt
 
 # Install submodules
 pip install ./submodules/diff-gaussian-rasterization

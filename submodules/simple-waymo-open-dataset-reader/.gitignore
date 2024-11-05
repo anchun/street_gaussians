@@ -1,0 +1,7 @@
+build/
+simple_waymo_open_dataset_reader.egg-info/
+dist/
+
+__pycache__
+
+*.so
