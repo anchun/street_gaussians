@@ -100,9 +100,11 @@ def make_cfg(cfg, args):
 
 def save_cfg(cfg, model_dir, epoch=0):
     from contextlib import redirect_stdout
-    os.system('mkdir -p {}'.format(model_dir))
+    if not os.path.exists(model_dir):
+        os.makedirs(model_dir)
     cfg_dir = os.path.join(model_dir, 'configs')
-    os.system('mkdir -p {}'.format(cfg_dir))
+    if not os.path.exists(cfg_dir):
+        os.makedirs(cfg_dir)
 
     cfg_path = os.path.join(cfg_dir, f'config_{epoch:06d}.yaml')
     with open(cfg_path, 'w') as f:
