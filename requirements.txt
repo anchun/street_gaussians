@@ -24,4 +24,4 @@ termcolor
 segment_anything
 scikit-learn
 ninja
-#git+https://github.com/NVlabs/nvdiffrast.git
+git+https://github.com/NVlabs/nvdiffrast.git

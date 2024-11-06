@@ -92,7 +92,7 @@ python train.py --config configs/xxxx.yaml
 
 Training on example scenes
 ```
-bash script/train_waymo_expample.sh
+bash script/train_waymo_example.sh
 ```
 
 Training on experiment scenes
@@ -106,7 +106,7 @@ python render.py --config configs/xxxx.yaml mode {evaluate, trajectory}
 ```
 Rendering on example scenes
 ```
-bash script/render_waymo_expample.sh
+bash script/render_waymo_example.sh
 ```
 
 Rendering on experiment scenes
