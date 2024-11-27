@@ -400,6 +400,8 @@ def training_report(tb_writer, iteration, scalar_stats, tensor_stats, testing_it
 
 if __name__ == "__main__":
     print("Optimizing " + cfg.model_path)
+    
+    print("CUDA_VISIBLE_DEVICES: ", os.environ["CUDA_VISIBLE_DEVICES"])
 
     # Initialize system state (RNG)
     safe_state(cfg.train.quiet)

@@ -11,6 +11,7 @@ from lib.config import cfg
 from lib.visualizers.base_visualizer import BaseVisualizer as Visualizer
 from lib.visualizers.street_gaussian_visualizer import StreetGaussianVisualizer
 import time
+import numpy as np
 
 def render_sets():
     cfg.render.save_image = True
@@ -79,6 +80,13 @@ def render_trajectory():
         cameras = list(sorted(cameras, key=lambda x: x.id))
 
         for idx, camera in enumerate(tqdm(cameras, desc="Rendering Trajectory")):
+            # noval view synthesis
+            w2c = np.eye(4)
+            w2c[:3, :3] = camera.R.T
+            w2c[:3, 3] = camera.T
+            camera.set_extrinsic(np.linalg.inv(w2c))
+            intrinsic = camera.get_intrinsic()     
+            camera.set_intrinsic(intrinsic)
             result = renderer.render_all(camera, gaussians)  
             visualizer.visualize(result, camera)
 
@@ -86,6 +94,8 @@ def render_trajectory():
             
 if __name__ == "__main__":
     print("Rendering " + cfg.model_path)
+    print("CUDA_VISIBLE_DEVICES: ", os.environ["CUDA_VISIBLE_DEVICES"])
+    
     safe_state(cfg.eval.quiet)
     
     if cfg.mode == 'evaluate':
