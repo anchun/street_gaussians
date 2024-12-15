@@ -15,6 +15,7 @@ from tqdm import tqdm
 from argparse import ArgumentParser, Namespace
 from lib.utils.system_utils import searchForMaxIteration
 import time
+import shutil
 try:
     from torch.utils.tensorboard import SummaryWriter
     TENSORBOARD_FOUND = True
@@ -327,12 +328,12 @@ def prepare_output_and_logger():
     # Set up output folder
     print("Output folder: {}".format(cfg.model_path))
 
+    if not cfg.resume:
+        shutil.rmtree(cfg.record_dir)
+        shutil.rmtree(cfg.trained_model_dir)
     os.makedirs(cfg.model_path, exist_ok=True)
     os.makedirs(cfg.trained_model_dir, exist_ok=True)
     os.makedirs(cfg.record_dir, exist_ok=True)
-    if not cfg.resume:
-        os.system('rm -rf {}/*'.format(cfg.record_dir))
-        os.system('rm -rf {}/*'.format(cfg.trained_model_dir))
 
     with open(os.path.join(cfg.model_path, "cfg_args"), 'w') as cfg_log_f:
         viewer_arg = dict()

@@ -8,6 +8,7 @@ import shutil
 import sys
 sys.path.append(os.getcwd())
 import json
+import pathlib
 
 from scipy.spatial.transform import Rotation as R
 from lib.config import cfg
@@ -223,7 +224,7 @@ def run_colmap_waymo(result):
 
     # create points3D.txt
     points3D_fn = os.path.join(model_dir, 'points3D.txt')
-    os.system(f'touch {points3D_fn}')
+    pathlib.Path(points3D_fn).touch()
     
     # create rid ba config
     cam_rigid = dict()
@@ -291,9 +292,9 @@ def run_colmap_waymo(result):
                 --BundleAdjustment.refine_principal_point 0 \
                 --BundleAdjustment.refine_extra_params 0')
 
-    os.system(f'rm -rf {train_images_dir}')
-    os.system(f'rm -rf {test_images_dir}')  
-    os.system(f'rm -rf {mask_images_dir}')
+    shutil.rmtree(train_images_dir)
+    shutil.rmtree(test_images_dir)
+    shutil.rmtree(mask_images_dir)
     
 if __name__ == '__main__':
     run_colmap_waymo(result=None)

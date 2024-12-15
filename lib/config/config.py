@@ -7,7 +7,7 @@ from lib.utils.cfg_utils import make_cfg
 
 cfg = CN()
 
-cfg.workspace = os.environ['PWD']
+cfg.workspace = os.getcwd()
 cfg.loaded_iter = -1
 cfg.ip = '127.0.0.1'
 cfg.port = 6009

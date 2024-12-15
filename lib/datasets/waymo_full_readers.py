@@ -21,12 +21,12 @@ def readWaymoFullInfo(path, images='images', split_train=-1, split_test=-1, **kw
     if cfg.data.get('load_pcd_from', False) and (cfg.mode == 'train'):
         load_dir = os.path.join(cfg.workspace, cfg.data.load_pcd_from, 'input_ply')
         save_dir = os.path.join(cfg.model_path, 'input_ply')
-        os.system(f'rm -rf {save_dir}')
+        shutil.rmtree(save_dir)
         shutil.copytree(load_dir, save_dir)
         
         colmap_dir = os.path.join(cfg.workspace, cfg.data.load_pcd_from, 'colmap')
         save_dir = os.path.join(cfg.model_path, 'colmap')
-        os.system(f'rm -rf {save_dir}')
+        shutil.rmtree(save_dir)
         shutil.copytree(colmap_dir, save_dir)
         
     bkgd_ply_path = os.path.join(cfg.model_path, 'input_ply/points3D_bkgd.ply')

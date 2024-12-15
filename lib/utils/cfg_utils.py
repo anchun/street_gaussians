@@ -29,7 +29,7 @@ def parse_cfg(cfg, args):
     #     for module in modules:
     #         cfg[module.replace('_module', '_path')] = cfg[module].replace('.', '/') + '.py'
 
-    cur_workspace = os.environ['PWD']
+    cur_workspace = os.getcwd()
 
     # model directory
     if cfg.model_path == '':
